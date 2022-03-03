@@ -1,8 +1,8 @@
 import { FastifyPluginAsync } from 'fastify'
 
 const root: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
-  fastify.get('/', async function (request, reply) {
-    return 'Hello'
+  fastify.get('/', async function (request, reply:any) {
+    reply.send('../views/home.pug', {title: 'Home', message: 'Home'}) 
   })
 }
 
