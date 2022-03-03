@@ -2,17 +2,10 @@ html
     head 
         title= title 
     body 
-        h1= message
-        nav
-            li
-                a(href='/') Home
-            li
-                a(href='/client') Clients
-            li
-                a(href='/admin') Admin
+        h1= pageTitle
 
-        h2 Client list
-        ul
-            each val in user 
-                li 
-                    a(href="/"+val.name)=val.name
+        h2= message
+        ul  
+            //- each val in user 
+            //-     li 
+            //-         a(href="/profile/"+val.name)=val.name 
