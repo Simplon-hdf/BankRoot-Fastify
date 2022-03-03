@@ -8,7 +8,6 @@ const root: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
   fastify.get('/client', async function (request, reply:any) {
     return reply.view('src/views/client', { title: 'Client', pageTitle: 'Client' }) 
  })
-
 }
 
 export default root;
