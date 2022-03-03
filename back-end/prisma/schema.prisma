@@ -9,3 +9,39 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id                    Int                   @id @default(autoincrement())
+  first_name            String
+  last_name             String
+  mail                  String                @unique
+} 
+
+model Client {
+  id                    Int                   @id @default(autoincrement())
+  numberClient          Int
+  account               Account               []
+}
+
+model Admin {
+  id                    Int                   @id @default(autoincrement())
+  numberAdmin           Int
+}
+
+model Account {
+  id                    Int                   @id @default(autoincrement())
+  numberAccount         Int
+  balance               Int
+  client                Client                @relation(fields: [clientId], references: [id])
+  clientId              Int
+  transactionhistory    TransactionHistory    []
+}
+
+model TransactionHistory {
+    id                  Int                   @id @default(autoincrement())
+    date                DateTime      
+    debitClient         Int       
+    creditClient        Int       
+    account             Account               @relation(fields: [accountId], references: [id])
+    accountId           Int       
+}
