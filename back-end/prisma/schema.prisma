@@ -11,36 +11,27 @@ datasource db {
 }
 
 model User {
+  idUser              Int                   @id @default(autoincrement())
   first_name            String
   last_name             String
   mail                  String                @unique
- 
   client                Client                []
-  @@idClient([first_name, last_name, mail])
-  
   admin                 Admin                 []
-  @@idAdmin([first_name, last_name, mail])
 } 
 
 model Client {
   idClient              Int                   @id @default(autoincrement())
   numberClient          Int
-  
-  user                  User                  @relation(fields: [userFirst_name, userLast_name, userMail], references: [first_name, last_name, mail])
-  userFirst_name        String
-  userLast_name         String
-  userMail              String
+  user                  User                  @relation(fields: [userId], references: [idUser])
+  userId                Int
   account               Account               []
 }
 
 model Admin {
   idAdmin               Int                   @id @default(autoincrement())
   numberAdmin           Int
-
-  user                  User                  @relation(fields: [userFirst_name, userLast_name, userMail], references: [first_name, last_name, mail])
-  userFirst_name        String
-  userLast_name         String
-  userMail              String
+  user                  User                  @relation(fields: [userId], references: [idUser])
+  userId                Int
 }
 
 model Account {
