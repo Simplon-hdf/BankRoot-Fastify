@@ -11,12 +11,12 @@ datasource db {
 }
 
 model User {
-  idUser              Int                   @id @default(autoincrement())
+  idUser                Int                   @id @default(autoincrement())
   first_name            String
   last_name             String
   mail                  String                @unique
-  client                Client                []
-  admin                 Admin                 []
+  client                Client?                
+  admin                 Admin?                 
 } 
 
 model Client {
@@ -44,10 +44,10 @@ model Account {
 }
 
 model TransactionHistory {
-  idTransactionHistory Int                   @id @default(autoincrement())
-  date                DateTime      
-  debitClient         Int       
-  creditClient        Int
-  account             Account                @relation(fields: [accountId], references: [idAccount])
-  accountId           Int
+  idTransactionHistory  Int                   @id @default(autoincrement())
+  date                  DateTime      
+  debitClient           Int       
+  creditClient          Int
+  account               Account               @relation(fields: [accountId], references: [idAccount])
+  accountId             Int
 }
