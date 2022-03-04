@@ -15,17 +15,23 @@ model User {
   first_name            String
   last_name             String
   mail                  String                @unique
+  client                Client                []
+  admin                 Admin                 []
 } 
 
 model Client {
   id                    Int                   @id @default(autoincrement())
   numberClient          Int
+  user                  User                  @relation(fields: [userId], references: [id])
+  userId                Int
   account               Account               []
 }
 
 model Admin {
   id                    Int                   @id @default(autoincrement())
   numberAdmin           Int
+  user                  User                  @relation(fields: [userId], references: [id])
+  userId                Int
 }
 
 model Account {
