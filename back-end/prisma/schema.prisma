@@ -10,37 +10,30 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Role {
+  idClient              Int                   @id @default(autoincrement())
+  roleType              String
+  user                  User                  []
+}
+
 model User {
   idUser                Int                   @id @default(autoincrement())
-  first_name            String
-  last_name             String
+  firstName             String
+  lastName              String
   mail                  String                @unique
-  client                Client?                
-  admin                 Admin?                 
+  numberUser            Int                   @unique
+  role                  Role                  @relation(fields: [roleId], references: [idClient])
+  roleId                Int
+  account               Account               []         
 } 
-
-model Client {
-  idClient              Int                   @id @default(autoincrement())
-  numberClient          Int
-  user                  User                  @relation(fields: [userId], references: [idUser])
-  userId                Int
-  account               Account               []
-}
-
-model Admin {
-  idAdmin               Int                   @id @default(autoincrement())
-  numberAdmin           Int
-  user                  User                  @relation(fields: [userId], references: [idUser])
-  userId                Int
-}
 
 model Account {
   idAccount             Int                   @id @default(autoincrement())
   numberAccount         Int
   balance               Int
   transactionHistory    TransactionHistory    []
-  client                Client                @relation(fields: [clientId], references: [idClient])
-  clientId              Int
+  user                  User                  @relation(fields: [userId], references: [idUser])
+  userId                Int
 }
 
 model TransactionHistory {
