@@ -11,43 +11,52 @@ datasource db {
 }
 
 model User {
-  id                    Int                   @id @default(autoincrement())
   first_name            String
   last_name             String
   mail                  String                @unique
+ 
   client                Client                []
+  @@idClient([first_name, last_name, mail])
+  
   admin                 Admin                 []
+  @@idAdmin([first_name, last_name, mail])
 } 
 
 model Client {
-  id                    Int                   @id @default(autoincrement())
+  idClient              Int                   @id @default(autoincrement())
   numberClient          Int
-  user                  User                  @relation(fields: [userId], references: [id])
-  userId                Int
+  
+  user                  User                  @relation(fields: [userFirst_name, userLast_name, userMail], references: [first_name, last_name, mail])
+  userFirst_name        String
+  userLast_name         String
+  userMail              String
   account               Account               []
 }
 
 model Admin {
-  id                    Int                   @id @default(autoincrement())
+  idAdmin               Int                   @id @default(autoincrement())
   numberAdmin           Int
-  user                  User                  @relation(fields: [userId], references: [id])
-  userId                Int
+
+  user                  User                  @relation(fields: [userFirst_name, userLast_name, userMail], references: [first_name, last_name, mail])
+  userFirst_name        String
+  userLast_name         String
+  userMail              String
 }
 
 model Account {
-  id                    Int                   @id @default(autoincrement())
+  idAccount             Int                   @id @default(autoincrement())
   numberAccount         Int
   balance               Int
-  client                Client                @relation(fields: [clientId], references: [id])
+  transactionHistory    TransactionHistory    []
+  client                Client                @relation(fields: [clientId], references: [idClient])
   clientId              Int
-  transactionhistory    TransactionHistory    []
 }
 
 model TransactionHistory {
-    id                  Int                   @id @default(autoincrement())
-    date                DateTime      
-    debitClient         Int       
-    creditClient        Int       
-    account             Account               @relation(fields: [accountId], references: [id])
-    accountId           Int       
+  idTransactionHistory Int                   @id @default(autoincrement())
+  date                DateTime      
+  debitClient         Int       
+  creditClient        Int
+  account             Account                @relation(fields: [accountId], references: [idAccount])
+  accountId           Int
 }
