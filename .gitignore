@@ -64,7 +64,3 @@ test/types/index.js
 # compiled app
 dist
 .DS_Store
-
-# .env file
-/back-end/.env
-.env
