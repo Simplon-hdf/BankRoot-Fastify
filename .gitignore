@@ -66,4 +66,4 @@ dist
 .DS_Store
 
 # .env file
-**/.env
+**/*.env
