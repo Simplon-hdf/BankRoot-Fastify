@@ -66,4 +66,5 @@ dist
 .DS_Store
 
 # .env file
-**/*.env
+back-end/.env
+.env
