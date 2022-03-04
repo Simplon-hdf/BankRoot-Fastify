@@ -1,7 +1,7 @@
 {
   "extends": "fastify-tsconfig",
   "compilerOptions": {
-    "outDir": "src",
+    "outDir": "./dist",
     "sourceMap": true,
     "strict": true,
     "lib": ["esnext"],
