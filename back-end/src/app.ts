@@ -1,19 +1,28 @@
 import { join } from 'path';
 import AutoLoad, {AutoloadPluginOptions} from 'fastify-autoload';
 import { FastifyPluginAsync } from 'fastify';
-
+import { PrismaClient } from '@prisma/client'
 
 export type AppOptions = {
   // Place your custom options for app below here.
 } & Partial<AutoloadPluginOptions>;
+
+const prisma = new PrismaClient()
 
 const app: FastifyPluginAsync<AppOptions> = async (
     fastify,
     opts
 ): Promise<void> => {
 
-  // Do not touch the following lines
+  fastify.get('/', async (req, res) => {
+    const posts = await prisma.person.findMany({
+      where: { firstName: "Marie" }
+    })
+    res.send(posts)
+  })
 
+  // Do not touch the following lines
+  
   // This loads all plugins defined in plugins
   // those should be support plugins that are reused
   // through your application
