@@ -7,10 +7,9 @@ const root: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
 
   fastify.get('/', async (request, reply:any) => {
       const listPerson = await prisma.person.findMany({
-      where: { roleId: 2 }
+         where: { roleId: 2 }
       })
-      // reply.send(listPerson)
-      reply.view('src/views/home', { h3: listPerson })
+      reply.view('src/views/home', { h3: JSON.stringify(listPerson) })
    })
 
    fastify.get('/client', async function (request, reply:any) {
