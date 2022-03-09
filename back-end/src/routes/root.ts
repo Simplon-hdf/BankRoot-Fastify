@@ -4,20 +4,19 @@ import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
 const root: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
-//   fastify.get('/', async function (request, reply:any) {
-//      return reply.view('src/views/home', { title: 'Home', pageTitle: 'Home', message: 'Client list : ' }) 
-//   })
 
-  fastify.get('/', async (req, res) => {
-   const posts = await prisma.person.findMany({
-     where: { firstName: "marie" }
+  fastify.get('/', async (request, reply:any) => {
+      const listPerson = await prisma.person.findMany({
+      where: { roleId: 2 }
+      })
+      // reply.send(listPerson)
+      reply.view('src/views/home', { h3: listPerson })
    })
-   res.send(posts)
- })
 
-  fastify.get('/client', async function (request, reply:any) {
-    return reply.view('src/views/client', { title: 'Client', pageTitle: 'Client' }) 
- })
+   fastify.get('/client', async function (request, reply:any) {
+      reply.view('src/views/client', { title: 'Client', pageTitle: 'Client' }) 
+   })
+
 }
 
 export default root;

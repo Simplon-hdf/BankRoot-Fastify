@@ -6,9 +6,6 @@ import { FastifyPluginAsync } from 'fastify';
 export type AppOptions = {
   // Place your custom options for app below here.
 } & Partial<AutoloadPluginOptions>;
-
-
-
 const app: FastifyPluginAsync<AppOptions> = async (
     fastify,
     opts
