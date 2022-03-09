@@ -65,4 +65,5 @@ test/types/index.js
 dist
 .DS_Store
 
+# .env file
 .env
