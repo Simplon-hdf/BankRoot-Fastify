@@ -6,17 +6,18 @@ html
         h2 List of all clients
 
         container(style='display: flex')
-            table(style='width:60%', border='1', padding='1px')
+            table(style='width:60%', border='1')
                     tr
                         th Prénom
                         th Nom 
 
                     each person  in listPerson
                         tr
-                            td= person.firstName
+                            td 
+                                a(href="/client/"+person.firstName)=person.firstName
                             td= person.lastName
 
-            table(style='width:40%', border='1', padding='1px')
+            table(style='width:40%', border='1')
                     tr
                         th Solde
 
