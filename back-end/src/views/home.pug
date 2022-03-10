@@ -1,8 +1,35 @@
 html
     head 
         title Home 
-    body 
+    body(style='text-align: center') 
         h1 Dashboard
         h2 List of all clients
+
+        container(style='display: flex')
+            table(style='width:60%', border='1', padding='1px')
+                    tr
+                        th Prénom
+                        th Nom 
+
+                    each person  in listPerson
+                        tr
+                            td= person.firstName
+                            td= person.lastName
+
+            table(style='width:40%', border='1', padding='1px')
+                    tr
+                        th Solde
+
+                    each account in balance
+                        tr
+                            td= account.balance
+
+
+                
         
-        h3= h3 
+
+           
+
+
+
+
