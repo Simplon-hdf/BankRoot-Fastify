@@ -3,6 +3,11 @@ import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
+interface GetClient {
+   idPerson: String,
+   idAccount: String
+}
+
 const root: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
 
    fastify.get('/', async (request, reply:any) => {
@@ -11,17 +16,22 @@ const root: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
          where: { roleId: 2 }
       })
       reply.view('src/views/home', { listPerson: listPerson, balance: balance })
-   })
-
-   fastify.get('/client/:idPerson', async (request, reply:any) => {
-      const listPerson = await prisma.person.findMany()
-      console.log(listPerson + 'coucou')
-      const balance = await prisma.account.findMany()
-      console.log(balance)
-
-      reply.view('src/views/client', { listPerson: listPerson, balance: balance })
+      
    })
    
-}
+   fastify.get('/client/:idPerson', async (request, reply:any) => {
+      let objet = request.params as GetClient
 
+      const client = await prisma.person.findUnique({
+         where: { idPerson: Number(objet.idPerson) }
+      })
+
+      // const clientBalance = await prisma.account.findUnique({
+      //    where: { idAccount: Number(objet.idAccount) } 
+      // })
+      
+      reply.view('src/views/client', { person: client })
+   })
+
+}
 export default root;
