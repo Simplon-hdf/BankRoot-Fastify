@@ -15,8 +15,13 @@ const root: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
 
    fastify.get('/client/:idPerson', async (request, reply:any) => {
       const listPerson = await prisma.person.findMany()
-      reply.view('src/views/client', { listPerson: listPerson })
+      console.log(listPerson + 'coucou')
+      const balance = await prisma.account.findMany()
+      console.log(balance)
+
+      reply.view('src/views/client', { listPerson: listPerson, balance: balance })
    })
+   
 }
 
 export default root;
