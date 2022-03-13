@@ -5,6 +5,12 @@ const prisma = new PrismaClient()
 async function transfer(from: string, to: string, amount: number) {
     return await prisma.$transaction(async (prisma) => {
     // 1. Decrement amount from the sender.
+    const getPerson = await prisma.person.findUnique({
+      where: {
+        mail: from,
+      }
+    })
+
     const sender = await prisma.account.update({
       data: {
         balance: {
@@ -12,7 +18,7 @@ async function transfer(from: string, to: string, amount: number) {
         },
       },
       where: {
-        email: from,
+        idAccount: 1
       },
     })
     
@@ -29,7 +35,7 @@ async function transfer(from: string, to: string, amount: number) {
         },
       },
       where: {
-        email: to,
+        mail: to,
       },
     })
     return recipient
