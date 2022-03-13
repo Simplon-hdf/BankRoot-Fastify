@@ -24,8 +24,13 @@ const root: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
       const client = await prisma.person.findUnique({
          where: { idPerson: Number(objet.idPerson) }
       })
+
+      const listPerson = await prisma.person.findMany({
+         where: { roleId: 2 }
+      })
       
-      reply.view('src/views/client', { person: client })
+      reply.view('src/views/client', { person: client, listPerson: listPerson })
    })
+
 }
 export default root;
