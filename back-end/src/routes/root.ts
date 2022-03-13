@@ -4,8 +4,7 @@ import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
 interface GetClient {
-   idPerson: String,
-   idAccount: String
+   idPerson: String
 }
 
 const root: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
@@ -25,13 +24,8 @@ const root: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
       const client = await prisma.person.findUnique({
          where: { idPerson: Number(objet.idPerson) }
       })
-
-      // const clientBalance = await prisma.account.findUnique({
-      //    where: { idAccount: Number(objet.idAccount) } 
-      // })
       
       reply.view('src/views/client', { person: client })
    })
-
 }
 export default root;
