@@ -33,6 +33,6 @@ export async function withdraw(from: number, amount: number) {
       throw new Error(`${from} doesn't have enough to send ${amount}`)
     }
    
-    return withdraw
+    return sender
   })
 }
