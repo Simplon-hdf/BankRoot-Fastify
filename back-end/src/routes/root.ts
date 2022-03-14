@@ -41,10 +41,10 @@ const root: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
       reply.view('src/views/client', { person: client, listPerson: listPerson })
    })
 
-   fastify.post('/add', async (request, reply:any) => {
-      const {amount_withdrawn, amount_depose, amount_transfer} = request.body as Test
+   fastify.post('/addWithdrawn', async (request, reply:any) => {
+      const {amount_withdrawn} = request.body as Test
 
-      console.log(amount_withdrawn, amount_depose, amount_transfer)
+      console.log(amount_withdrawn)
 
       return request.body
    })

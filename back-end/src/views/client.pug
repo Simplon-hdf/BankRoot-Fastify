@@ -13,25 +13,33 @@ html
         h3= person.firstName
         h3= person.lastName
 
-        form(action='/add', method='POST')
+        form(action='/addWithdrawn', method='POST')
             span Withdrawn
                 p
                     | Amount to withdrawn: 
                     input(type='number', name='amount_withdrawn', value='')
             
+            input(type='submit', value='Submit Withdrawn')
+
+
+        form(action='/addDepose', method='POST')
             span Depose
                 p
                     | Amount to depose: 
                     input(type='number', name='amount_depose', value='')
             
+            input(type='submit', value='Submit Depose')
+       
+       
+        form(action='/addTransfer', method='POST')
             span Transfer
                 p
                     | Person to transfer: 
-                    select
+                    select(value='fsdfds')
                         each person in listPerson
                             option(value=person.firstName) #{person.firstName}
                 p
                     | Amount to transfer: 
                     input(type='number', name='amount_transfer', value='')
             
-            input(type='submit', value='Submit')
+            input(type='submit', value='Submit Transfer')
