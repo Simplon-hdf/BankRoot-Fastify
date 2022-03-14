@@ -22,14 +22,14 @@ html
             input(type='submit', value='Submit Withdrawn')
 
 
-        //- form(action='/addDepose', method='POST')
-        //-     input(type='hidden', name='person_id_origin', value=person.idPerson)
-        //-     span Depose
-        //-         p
-        //-             | Amount to depose: 
-        //-             input(type='number', name='amount_depose', value='')
+        form(action='/addDepose', method='POST')
+            input(type='hidden', name='person_id_origin', value=person.idPerson)
+            span Depose
+                p
+                    | Amount to depose: 
+                    input(type='number', name='amount_depose', value='')
             
-        //-     input(type='submit', value='Submit Depose')
+            input(type='submit', value='Submit Depose')
        
        
         form(action='/addTransfer', method='POST')

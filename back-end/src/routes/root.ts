@@ -1,6 +1,6 @@
 import { FastifyPluginAsync } from 'fastify'
 import { PrismaClient } from '@prisma/client'
-//import { deposite } from '../controllers/deposite'
+import { deposite } from '../controllers/deposite'
 import { withdraw } from '../controllers/withdraw'
 import { transfer } from '../controllers/transfer'
 
@@ -55,13 +55,13 @@ const root: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
       return request.body
    })
 
-   // fastify.post('/addDepose', async (request, reply:any) => {
-   //    const {amount_depose, person_id_origin} = request.body as GetAmount
-   //    if (amount_depose && person_id_origin) {
-   //       return deposite(+person_id_origin, +amount_depose)
-   //    }
-   //    return request.body
-   // })
+   fastify.post('/addDepose', async (request, reply:any) => {
+      const {amount_depose, person_id_origin} = request.body as GetAmount
+      if (amount_depose && person_id_origin) {
+         return deposite(+person_id_origin, +amount_depose)
+      }
+      return request.body
+   })
 
    fastify.post('/addTransfer', async (request, reply:any) => {
       const {amount_transfer, person_id_origin, person_to_transfert} = request.body as GetAmount
