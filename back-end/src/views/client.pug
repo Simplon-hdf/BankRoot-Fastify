@@ -13,7 +13,7 @@ html
         h3= person.lastName
 
         form(action='/addWithdrawn', method='POST')
-            input(type='hidden', name='person_name_origin', value=person.firstName)
+            input(type='hidden', name='person_id_origin', value=person.idPerson)
             span Withdrawn
                 p
                     | Amount to withdrawn: 
@@ -23,7 +23,7 @@ html
 
 
         form(action='/addDepose', method='POST')
-            input(type='hidden', name='person_name_origin', value=person.firstName)
+            input(type='hidden', name='person_id_origin', value=person.idPerson)
             span Depose
                 p
                     | Amount to depose: 
@@ -33,13 +33,13 @@ html
        
        
         form(action='/addTransfer', method='POST')
-            input(type='hidden', name='person_name_origin', value=person.firstName)
+            input(type='hidden', name='person_id_origin', value=person.idPerson)
             span Transfer
                 p
                     | Person to transfer: 
                     select(name='person_to_transfert')
                         each person in listPerson
-                            option(value=person.firstName) #{person.firstName}
+                            option(value=person.idPerson) #{person.firstName}
                 p
                     | Amount to transfer: 
                     input(type='number', name='amount_transfer', value='')
