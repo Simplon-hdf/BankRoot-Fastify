@@ -7,7 +7,7 @@ interface GetClient {
    idPerson: String
 }
 
-interface Test {
+interface GetAmount {
    amount_withdrawn: Number,
    amount_depose: Number,
    amount_transfer: Number
@@ -37,17 +37,24 @@ const root: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
       const listPerson = await prisma.person.findMany({
          where: { roleId: 2 }
       })
-      
       reply.view('src/views/client', { person: client, listPerson: listPerson })
    })
 
    fastify.post('/addWithdrawn', async (request, reply:any) => {
-      const {amount_withdrawn} = request.body as Test
+      const {amount_withdrawn} = request.body as GetAmount
+      return request.body
+   })
 
-      console.log(amount_withdrawn)
+   fastify.post('/addDepose', async (request, reply:any) => {
+      const {amount_depose} = request.body as GetAmount
+      return request.body
+   })
 
+   fastify.post('/addTransfer', async (request, reply:any) => {
+      const {amount_transfer} = request.body as GetAmount
       return request.body
    })
 }
+
 export default root;
 
