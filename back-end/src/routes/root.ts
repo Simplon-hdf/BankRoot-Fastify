@@ -57,8 +57,6 @@ const root: FastifyPluginAsync = async (fastify, opts): Promise<void> => {
 
    fastify.post('/addTransfer', async (request, reply:any) => {
       const {amount_transfer, person_id_origin, person_to_transfert} = request.body as GetAmount
-      console.log( 'amount_transfer : ' + +amount_transfer, 'person_id_origin : ' +  +person_id_origin, 'person_to_transfert : ' + +person_to_transfert)
-      console.log(JSON.stringify(request.body))
       if (amount_transfer && person_id_origin && person_to_transfert) {
          return transfer(+person_id_origin, +person_to_transfert, +amount_transfer)
       }

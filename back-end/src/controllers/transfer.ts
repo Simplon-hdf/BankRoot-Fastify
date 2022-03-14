@@ -2,7 +2,6 @@ import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
-
 export async function transfer(from: number, to: number, amount: number) {
     return await prisma.$transaction(async (prisma) => {
     // 1. Decrement amount from the sender.
@@ -17,7 +16,6 @@ export async function transfer(from: number, to: number, amount: number) {
         personId: getSenderPerson?.idPerson
       }
     })
-    console.log( 'getSenderAccount' + JSON.stringify(getSenderAccount))
 
     const sender = await prisma.account.update({
       data: {
@@ -29,7 +27,6 @@ export async function transfer(from: number, to: number, amount: number) {
         idAccount: getSenderAccount?.idAccount
       },
     })
-    console.log( 'sender' + JSON.stringify(sender))
     
     // 2. Verify that the sender's balance didn't go below zero.
     if (sender.balance < 0) {
@@ -42,14 +39,12 @@ export async function transfer(from: number, to: number, amount: number) {
         idPerson: to
       }
     })
-    console.log( 'getRecipientPerson' + JSON.stringify(getRecipientPerson))
 
     const getRecipientAccount = await prisma.account.findFirst({
       where: {
         personId: getRecipientPerson?.idPerson
       }
     })
-    console.log( 'getRecipientAccount' + JSON.stringify(getRecipientAccount))
 
     const recipient = prisma.account.update({
       data: {
@@ -61,20 +56,6 @@ export async function transfer(from: number, to: number, amount: number) {
         idAccount: getRecipientAccount?.idAccount
       },
     })
-    console.log('recipient' + JSON.stringify(recipient))
     return recipient
   })
 }
-
-
-// async function main() {
-//   // This transfer is successful
-//   await transfer(4, 3, 100)
-// }
-
-
-// main()
-//   .catch(console.error)
-//   .finally(() => {
-//     prisma.$disconnect()
-//   })
