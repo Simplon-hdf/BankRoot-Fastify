@@ -52,6 +52,10 @@ npm run dev
 👤 **Marie Baude**
 * Github: [@MarieBaude](https://github.com/MarieBaude)
 
+## Contributeur
+👤 **Xavier Plein**
+* Github: [@plx-edu](https://github.com/plx-edu)
+
 
 ***
 _This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
